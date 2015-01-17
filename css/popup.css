@@ -1,0 +1,27 @@
+html {
+
+}
+body {
+    width: 200px;
+    height: 220px;
+    padding: 0 15px;
+    height: 100%;
+    margin: 8px;
+}
+#name {
+    width: 100%;
+    font-size: 20px;
+    font-weight: lighter;
+    text-align: center;
+}
+button {
+    width: 100%;
+    background: #fafafa;
+    border: 1px solid #eee;
+    padding: 7px 0;
+    margin-top: 10px;
+    cursor: pointer;
+}
+button:hover {
+    background: #eee;
+}

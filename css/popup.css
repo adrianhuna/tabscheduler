@@ -25,3 +25,6 @@ button {
 button:hover {
     background: #eee;
 }
+p {
+    text-align: center;
+}

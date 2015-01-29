@@ -1,4 +1,5 @@
 function restore_options() {}
 $(function() {
     restore_options();
+    $("#switch").bootstrapSwitch();
 });

@@ -12,11 +12,11 @@
     <body>
         <div class="container">
             <h1 class="page-header">Options</h1>
+            <div class="alert alert-danger" id="alert" role="alert"></div>
             <h3>Activate</h3>
             <input type="checkbox" id="switch" data-size="mini" checked>
             <h3>Update time</h3>
-            <p>Current time: 17:00.</p>
-            <form class="form-inline">
+            <form id="update-time" class="form-inline">
                 <div class="form-group">
                     <input type="text" class="form-control" id="time" placeholder="HH:MM" required>
                 </div>

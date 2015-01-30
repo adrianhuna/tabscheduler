@@ -18,10 +18,7 @@ function restoreOptions() {
 }
 
 function enable() {
-    chrome.alarms.create("scheduler", {
-        when: Date.now() + 30000,
-        periodInMinutes: 1440
-    });
+    setAlarm();
     chrome.storage.local.set({
         "enabled": true
     });
@@ -38,6 +35,23 @@ function message(type, msg) {
     $("#alert").text(msg).removeClass().addClass("alert alert-" + type).hide().fadeIn();
 }
 
+function setAlarm() {
+    chrome.storage.local.get("time", function(r) {
+        var current = new Date();
+        var t = r.time.split(":");
+        var date = new Date(current.getFullYear(), current.getMonth(), current.getDate(), parseInt(t[0]), parseInt(t[1]));
+        if (date < current) {
+            current.setDate(current.getDate() + 1);
+            date = new Date(current.getFullYear(), current.getMonth(), current.getDate(), parseInt(t[0]), parseInt(t[1]));
+        }
+        chrome.alarms.clearAll();
+        chrome.alarms.create("scheduler", {
+            when: date.getTime(),
+            periodInMinutes: 1440
+        });
+    });
+}
+
 function updateTime() {
     var time = $("#time").val();
     if (!time) {
@@ -49,6 +63,9 @@ function updateTime() {
     }, function() {
         message("success", "Settings saved");
     });
+    if ($("#switch").bootstrapSwitch('state')) {
+        setAlarm();
+    }
 }
 
 function addToList(url) {
@@ -85,6 +102,12 @@ $(function() {
     $("#switch").bootstrapSwitch();
     $("#switch").on("switchChange.bootstrapSwitch", function(event, state) {
         state ? enable() : disable();
+    });
+    $('#time').timepicker({
+        template: false,
+        showInputs: false,
+        showMeridian: false,
+        minuteStep: 5
     });
     $("#update-time").submit(function(e) {
         e.preventDefault();

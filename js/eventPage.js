@@ -13,7 +13,7 @@ chrome.alarms.onAlarm.addListener(function(alarm) {
         } else {
             runAlarm();
         }
-    })
+    });
 });
 chrome.windows.onCreated.addListener(function(window) {
     chrome.storage.local.get("missed", function(r) {
@@ -22,6 +22,18 @@ chrome.windows.onCreated.addListener(function(window) {
                 "missed": 0
             });
             runAlarm();
+        }
+    });
+});
+chrome.runtime.onInstalled.addListener(function(details) {
+    chrome.storage.local.get("enabled", function(r) {
+        if (r.enabled === undefined) {
+            chrome.storage.local.set({
+                "sites": [],
+                "time": "08:00",
+                "enabled": false,
+                "missed": 0
+            });
         }
     });
 });

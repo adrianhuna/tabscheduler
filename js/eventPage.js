@@ -4,6 +4,7 @@ function runAlarm() {
     });
 }
 chrome.alarms.onAlarm.addListener(function(alarm) {
+    console.log(alarm);
     chrome.tabs.query({}, function(tabs) {
         if (tabs.length === 0) {
             chrome.storage.local.set({

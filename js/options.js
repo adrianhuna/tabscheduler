@@ -1,18 +1,30 @@
 function restoreOptions() {
-    chrome.storage.local.get("time", function(r) {
+    chrome.storage.local.get(["time", "enabled"], function(r) {
         $("#time").val(r.time);
+        if (r.enabled && !$("#switch").bootstrapSwitch('state')) {
+            $("#switch").bootstrapSwitch('state', true);
+        }
+        console.log($("#switch").state);
+        console.log(r.enabled === true);
     });
 }
 
 function enable() {
+    console.log(Date.now());
     chrome.alarms.create("scheduler", {
-        when: Date.now() + 30,
+        when: Date.now() + 30000,
         periodInMinutes: 1440
     })
+    chrome.storage.local.set({
+        "enabled": true
+    });
 }
 
 function disable() {
     chrome.alarms.clearAll();
+    chrome.storage.local.set({
+        "enabled": false
+    });
 }
 
 function message(type, msg) {

@@ -1,6 +1,10 @@
 function runAlarm() {
-    chrome.tabs.create({
-        url: "http://example.com"
+    chrome.storage.local.get("sites", function(r) {
+        for (var i = 0; i < r.sites.length; i++) {
+            chrome.tabs.create({
+                url: r.sites[i]
+            });
+        }
     });
 }
 chrome.alarms.onAlarm.addListener(function(alarm) {

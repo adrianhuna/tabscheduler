@@ -1,21 +1,24 @@
 {
-  "manifest_version": 2,
-
-  "name": "TabScheduler",
-  "description": "This extension opens websites at specified time every day",
-  "version": "1.0",
-
-  "options_page": "/html/options.html",
-
-  "browser_action": {
-    "default_icon": "/images/icon.png",
-    "default_popup": "/html/popup.html"
-  },
-
-  "background": {
-    "scripts": ["/js/eventPage.js"],
-    "persistent": false
-  },
-
-  "permissions": [ "tabs", "alarms", "storage" ]
+    "manifest_version": 2,
+    "name": "TabScheduler",
+    "description": "This extension opens websites at specified time every day",
+    "version": "1.0",
+    "icons": {
+        "16": "/images/icon16.png",
+        "48": "/images/icon48.png",
+        "128": "/images/icon128.png"
+    },
+    "options_page": "/html/options.html",
+    "browser_action": {
+        "default_icon": {
+          "16": "/images/icon16.png",
+        "48": "/images/icon48.png"
+        },
+        "default_popup": "/html/popup.html"
+    },
+    "background": {
+        "scripts": ["/js/eventPage.js"],
+        "persistent": false
+    },
+    "permissions": ["tabs", "alarms", "storage"]
 }

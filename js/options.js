@@ -5,7 +5,7 @@ function addToListHtml(url) {
 function restoreOptions() {
     chrome.storage.local.get(["time", "enabled", "sites"], function(r) {
         $("#time").val(r.time);
-        if (r.enabled && !$("#switch").bootstrapSwitch('state')) {
+        if (r.enabled) {
             $("#switch").bootstrapSwitch('state', true, true);
         }
         if (r.sites.length == 0) {

@@ -14,29 +14,39 @@
     </head>
     <body>
         <div class="container">
-            <h1 class="page-header">Options</h1>
+            <h1 class="page-header">TabScheduler settings</h1>
             <div class="alert alert-danger" id="alert" role="alert"></div>
-            <h3>Activated</h3>
-            <input type="checkbox" id="switch" data-size="small">
-            <h3>Scheduled time</h3>
-            <form id="update-time" class="form-inline">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="time" placeholder="HH:MM" required>
-                    <span class="add-on"><i class="icon-time"></i></span>
+            <div class="row">
+                <div class="col-md-12">
+                    <p>With TabScheduler you can set a list of websites which will open at the specified time.</p>
+                    <h3>Activated</h3>
+                    <input type="checkbox" id="switch" data-size="small">
+                    <h3>Scheduled time</h3>
+                    <form id="update-time" class="form-inline">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="time" placeholder="HH:MM" required>
+                            <span class="add-on"><i class="icon-time"></i></span>
+                        </div>
+                        <button type="submit" class="btn btn-default">Update</button>
+                    </form>
                 </div>
-                <button type="submit" class="btn btn-default">Update</button>
-            </form>
-            <h3>Edit sites</h3>
-            <form class="form-inline" id="add-site">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="url" placeholder="www.example.com" required>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <h3>Edit sites</h3>
+                    <form class="form-inline" id="add-site">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="url" placeholder="www.example.com" required>
+                        </div>
+                        <button type="submit" class="btn btn-default">Add new site</button>
+                    </form>
                 </div>
-                <button type="submit" class="btn btn-default">Add new site</button>
-            </form>
-            <br>
-            <b>Current sites list</b>
-            <ul id="list">
-            </ul>
+                <div id="list" class="col-md-7">
+                    <h4>Current sites list</h4>
+                    <table id="table" class="table table-striped col-sm-12">
+                    </table>
+                </div>
+            </div>
         </div>
     </body>
 </html>

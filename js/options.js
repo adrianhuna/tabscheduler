@@ -1,5 +1,5 @@
 function addToListHtml(url) {
-    $("#list").append('<li><a href="' + url + '" target="_blank">' + url + '</a> - <button class="btn btn-danger btn-xs delete-site">Remove</button></li>');
+    $("#table").prepend('<tr><td class="col-xs-10"><a href="' + url + '" target="_blank">' + url + '</a></td><td class="col-xs-2"><button class="btn btn-danger btn-xs delete-site">Remove</button></td></tr>');
 }
 
 function restoreOptions() {
@@ -9,7 +9,7 @@ function restoreOptions() {
             $("#switch").bootstrapSwitch('state', true, true);
         }
         if (r.sites.length == 0) {
-            $("#list").append('Empty');
+            $("#table").append('<tr><td>Empty</td></tr>');
         }
         for (var i = 0; i < r.sites.length; i++) {
             addToListHtml(r.sites[i]);
@@ -38,7 +38,7 @@ function updateTime() {
 }
 
 function addToList(url) {
-    if (url.substring(0, 7) != "http://") {
+    if (url.substring(0, 7) != "http://" && url.substring(0, 8) != "https://") {
         url = "http://" + url;
     }
     addToListHtml(url);
@@ -54,13 +54,15 @@ function addToList(url) {
 function removeFromList(t) {
     chrome.storage.local.get("sites", function(r) {
         var array = r.sites;
-        var index = array.indexOf(t.prev("a").attr("href"));
+        var index = array.indexOf(t.closest("tr").find("a").attr("href"));
         if (index > -1) {
             array.splice(index, 1);
             chrome.storage.local.set({
                 "sites": array
             });
-            t.parent("li").remove();
+            t.closest("tr").fadeOut("fast", function() {
+                $(this).remove();
+            });
         } else {
             message("danger", "Error: We couln't remove the site. Please try again.");
         }
@@ -76,7 +78,7 @@ $(function() {
         template: false,
         showInputs: false,
         showMeridian: false,
-        minuteStep: 5
+        minuteStep: 1
     });
     $("#update-time").submit(function(e) {
         e.preventDefault();
